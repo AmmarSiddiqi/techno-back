@@ -22,6 +22,6 @@ user.post("/verifyEmail", auth, verifyEmail);
 user.post("/verifyPhone", auth, verifyPhone);
 user.post("/forgotPassword", forgotPassword);
 user.post("/changePassword", changePassword);
-user.post("/uploadImage", userPicture);
+user.post("/uploadImage", auth ,userPicture);
 
 export { user as userRouter };

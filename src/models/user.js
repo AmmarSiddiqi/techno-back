@@ -48,7 +48,11 @@ const userSchema = mongoose.Schema({
         type: String,
         maxLength: 255
     },
-    favourites: [{_id: {type: mongoose.Schema.Types.ObjectId, ref:"Product"}}]
+    favourites: [{_id: {type: mongoose.Schema.Types.ObjectId, ref:"Product"}}],
+    image: {
+        url: { type: String },
+        id: { type: String }
+    }
 });
 
 const validate = (user) => {
