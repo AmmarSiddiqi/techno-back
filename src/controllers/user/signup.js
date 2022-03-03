@@ -1,8 +1,7 @@
 import handleRouteErrors from "../../handleRouteErrors.js";
 import { User, validate } from "../../models/user.js";
-import twilio from "twilio";
-import sendGirdMail from "@sendgrid/mail";
 import { genSalt, hash } from "bcrypt";
+import twilio from "twilio";
 
 const signup = handleRouteErrors(async(req,res)=>{
     const validated = await validate(req.body);
@@ -16,22 +15,13 @@ const signup = handleRouteErrors(async(req,res)=>{
          body: `Your verification key is: ${phoneValidationKey}`,        
          to: `${user.countryCode + user.phoneNumber}` 
     });
-    const emailValidationKey = Math.floor(100000 + Math.random() * 900000);
-    sendGirdMail.setApiKey(process.env.sendGirdApiKey);
-    const emailData = {
-        to: user.email,
-        from: process.env.verifiedSender,
-        subject: 'Techno MarketPlace Email Verification',
-        text: `Your verification code is: ${emailValidationKey}`
-    }
-    await sendGirdMail.send(emailData);
     const salt = await genSalt(10);
     const hashedPass = await hash(user.password,salt);
     const hashedPhoneKey = await hash(phoneValidationKey.toString(),salt);
-    const hashedEmailKey = await hash(emailValidationKey.toString(),salt);
+    const verifyHash = await hash(process.env.falseSecret,salt);
     user.password = hashedPass;
     user.phoneValidationKey = hashedPhoneKey;
-    user.emailValidationKey = hashedEmailKey;
+    user.verified = verifyHash;
     await user.save();
     const token = user.genAuthToken();
     let userToSend = {
@@ -42,7 +32,7 @@ const signup = handleRouteErrors(async(req,res)=>{
         verified: user.verified, 
         favourites: user.favourites
     }
-    res.status(200).send({user: userToSend,token}); 
+    res.status(200).send({user: userToSend,token});
 })
 
 export default signup;

@@ -18,8 +18,7 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        minLength: 5,
-        maxLength: 255,
+        maxLength: 2048,
         required: true
     },
     countryCode: {
@@ -32,21 +31,15 @@ const userSchema = mongoose.Schema({
     },
     verified: {
         type: String,
-        maxLength: 255
+        maxLength: 2048
     },
     phoneValidationKey: {
-        type: String
-    },
-    emailValidationKey: {
-        type: String
+        type: String,
+        maxLength: 2048
     },
     phoneVerified: {
         type: String,
-        maxLength: 255
-    },
-    emailVerified: {
-        type: String,
-        maxLength: 255
+        maxLength: 2048
     },
     favourites: [{_id: {type: mongoose.Schema.Types.ObjectId, ref:"Product"}}],
     image: {
@@ -89,9 +82,10 @@ const validate = (user) => {
 }
 
 userSchema.methods.genAuthToken = async function () {
-    const verified = await compare(this.verified, process.env.trueSecret);
+    const verified = await compare(process.env.trueSecret,this.verified||"");
     const token = jwt.sign(
-        { _id: this._id, name: this.name, email: this.email, verified, verifiedKey: this.verified, countryCode: this.countryCode , phoneNumber: this.phoneNumber }
+        { _id: this._id, name: this.name, email: this.email, verified, verifiedKey: this.verified, 
+            countryCode: this.countryCode , phoneNumber: this.phoneNumber }
         , process.env.jwtPrivateKey
     );
     return token;

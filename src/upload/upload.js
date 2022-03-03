@@ -1,4 +1,3 @@
-// const { drive_v3, google } = require("googleapis");
 import googleApis from "googleapis";
 import fs from "fs";
 import path from "path";

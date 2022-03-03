@@ -4,7 +4,6 @@ import { production } from './../constants/constants.js';
 
 class Server {
     PORT = process.env.PORT || 3500;
-    DEV_HOST = os.networkInterfaces()["Ethernet"].find(item => item.family === "IPv4");
 
     constructor(app){
         if(!production) this.createDevelopmentServer(app);
@@ -12,9 +11,12 @@ class Server {
     }
 
     createDevelopmentServer(app){
+        const networkInterfaces = os.networkInterfaces();
+        const networkTypes = Object.values(networkInterfaces).reduce((a,b) => a.concat(b));
+        const {address} = networkTypes.find(type => type.family === "IPv4");
         return http.createServer(app).listen(
-            {host: this.DEV_HOST.address, port: this.PORT},
-            ()=>console.log(`Development Server IP: ${this.DEV_HOST.address} PORT: ${this.PORT}`))
+            {host: address, port: this.PORT},
+            ()=>console.log(`Development Server IP: ${address} PORT: ${this.PORT}`))
     }
 
     createProductionServer(app){
