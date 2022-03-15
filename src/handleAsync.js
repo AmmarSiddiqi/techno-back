@@ -1,7 +1,7 @@
-const handleAsync = (callback) => {
-    return async(...args) => {
+const handleAsync = (callback, ...rest) => {
+    return async() => {
         try {
-            await callback(...args);
+            await callback(...rest);
         } catch (error) {
             console.error(error);
         }

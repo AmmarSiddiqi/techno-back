@@ -41,7 +41,7 @@ const userSchema = mongoose.Schema({
         type: String,
         maxLength: 2048
     },
-    favourites: [{_id: {type: mongoose.Schema.Types.ObjectId, ref:"Product"}}],
+    favourites: [{type: mongoose.Schema.Types.ObjectId, ref:"Product"}],
     image: {
         url: { type: String },
         id: { type: String }
