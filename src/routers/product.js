@@ -9,9 +9,11 @@ import removeFromFavourites from './../controllers/product/removeFromFavourites.
 import getById from './../controllers/product/getById.js';
 import verification from './../middlewares/verification.js';
 import getFavourites from './../controllers/product/getFavourites.js';
+import getMyAds from './../controllers/product/getMyAds.js';
 
 const product = Router();
 
+product.get("/myads", auth, getMyAds);
 product.get("/:id", getById);
 product.post("/",getProducts);
 product.post("/add", auth, verification, addProduct);
@@ -19,6 +21,6 @@ product.post("/getFavourites", auth, verification, getFavourites);
 product.patch("/", auth, verification, updateProduct);
 product.patch("/favourites", auth, verification, addToFavourites);
 product.patch("/removeFavourites", auth, verification, removeFromFavourites);
-product.delete("/", auth, verification, deleteProduct);
+product.delete("/:id", auth, verification, deleteProduct);
 
 export { product as productRouter };

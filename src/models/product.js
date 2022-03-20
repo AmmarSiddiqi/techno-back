@@ -51,9 +51,11 @@ const productSchema = new mongoose.Schema({
 	},
 	category: { type: String, required: true },
 	subCategory: { type: String, required: true },
-	country: { type: String, required: true },
-	city: { type: String, required: true },
-	favourites: [{type: mongoose.Schema.Types.ObjectId, ref:"User"}]
+	location: { type: mongoose.Schema.Types.ObjectId, ref:'Location' },
+	favourites: [{type: mongoose.Schema.Types.ObjectId, ref:"User"}],
+	lat: {type: String},
+	lng: {type: String},
+	isActive: {type: Boolean, default:true}
 })
 
 const validate = product => {
@@ -72,18 +74,18 @@ const validate = product => {
 		title: yup.string().min(8).max(80).required("Please provide product title"),
 		description: yup.string().min(15).max(1000).required("Please provide product description"),
 		price: yup.string().required("Please provide product price"),
-		owner: yup.string().required(),
 		category: yup.string().required("Please provide product category"),
 		subCategory: yup.string().required("Please provide sub-category for product"),
-		country: yup.string().required("Please provide country for product"),
-		city: yup.string().required("Please provide city for product"),
+		location: yup.string().required(),
 		picture: yup.object({
 			image1: imageSchema.required("Please provide product picture"),
 			image2: imageSchema,
 			image3: imageSchema,
 			image4: imageSchema,
 			image5: imageSchema,
-		}).nullable(false)
+		}).nullable(false),
+		lat: yup.string().nullable(true),
+		lng: yup.string().nullable(true)
 	})
 	return schema.validate(product)
 }

@@ -13,7 +13,7 @@ class Server {
     createDevelopmentServer(app){
         const networkInterfaces = os.networkInterfaces();
         const networkTypes = Object.values(networkInterfaces).reduce((a,b) => a.concat(b));
-        const {address} = networkTypes.find(type => type.family === "IPv4" && type.address.indexOf("192")!==-1);
+        const {address} = networkTypes.find(type => type.family === "IPv4" && type.address.indexOf("18")!==-1);
         return http.createServer(app).listen(
             {host: address, port: this.PORT},
             ()=>console.log(`Development Server IP: ${address} PORT: ${this.PORT}`))
