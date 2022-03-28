@@ -23,7 +23,7 @@ const signup = handleRouteErrors(async(req,res)=>{
     user.phoneValidationKey = hashedPhoneKey;
     user.verified = verifyHash;
     await user.save();
-    const token = user.genAuthToken();
+    const token = await user.genAuthToken();
     let userToSend = {
         name: user.name,
         email: user.email, 

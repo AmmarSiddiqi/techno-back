@@ -1,5 +1,6 @@
 import handleRouteErrors from './../../handleRouteErrors.js';
 import { User } from '../../models/user.js';
+import { compare } from 'bcrypt';
 
 const getUser = handleRouteErrors(async(req,res)=>{
     const user = await User.findById(req.user._id)

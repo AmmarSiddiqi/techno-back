@@ -1,0 +1,17 @@
+### This is to login into the application
+POST http://192.168.18.4:3500/api/user/login
+Content-Type: application/json
+
+{
+    "email":"fa18-bcs-116@cuilahore.edu.pk",
+    "password":"Mehdishah57"
+}
+
+### This is to change product to public or private
+POST http://192.168.18.4:3500/api/product/status
+Content-Type: application/json
+auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkNTFjODJiMzAzYWNiZWViM2IyNjMiLCJuYW1lIjoiU3llZCBBbGkgTWVoZGkiLCJlbWFpbCI6ImZhMTgtYmNzLTExNkBjdWlsYWhvcmUuZWR1LnBrIiwidmVyaWZpZWQiOnRydWUsInZlcmlmaWVkS2V5IjoiJDJiJDEwJHNUckphWTRJcm1QT05PSzFuZWNxLk8wOS55aWNvajBsMWo4elZWUzU1bElWNmt4bmhNSDQyIiwiY291bnRyeUNvZGUiOiI5MiIsInBob25lTnVtYmVyIjoiMDMzMjQ1NjQ4MTgiLCJpYXQiOjE2NDgxOTQ3NzB9.fjZwdQo5E_UCmx_U2_Afrx-O_Vg61AVe1-cJvTqx5Dw
+
+{
+    "id": "623d70eb2d1b7de2c006d619"
+}
