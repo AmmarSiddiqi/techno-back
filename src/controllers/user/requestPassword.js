@@ -1,7 +1,6 @@
 import handleRouteErrors from "../../handleRouteErrors.js";
 import { User } from "../../models/user.js";
 import twilio from "twilio";
-import sendGirdMail from "@sendgrid/mail";
 import { genSalt, hash } from "bcrypt";
 
 const forgotPassword = handleRouteErrors(async (req, res) => {

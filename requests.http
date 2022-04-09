@@ -15,3 +15,22 @@ auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkNTFjODJiMzAzYWNi
 {
     "id": "623d70eb2d1b7de2c006d619"
 }
+
+### This is to verify phone Number and activate account
+POST http://192.168.18.4:3500/api/user/verify
+Content-Type: application/application/json
+auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkNTFjODJiMzAzYWNiZWViM2IyNjMiLCJuYW1lIjoiU3llZCBBbGkgTWVoZGkiLCJlbWFpbCI6ImZhMTgtYmNzLTExNkBjdWlsYWhvcmUuZWR1LnBrIiwidmVyaWZpZWQiOnRydWUsInZlcmlmaWVkS2V5IjoiJDJiJDEwJHNUckphWTRJcm1QT05PSzFuZWNxLk8wOS55aWNvajBsMWo4elZWUzU1bElWNmt4bmhNSDQyIiwiY291bnRyeUNvZGUiOiI5MiIsInBob25lTnVtYmVyIjoiMDMzMjQ1NjQ4MTgiLCJpYXQiOjE2NDgxOTQ3NzB9.fjZwdQo5E_UCmx_U2_Afrx-O_Vg61AVe1-cJvTqx5Dw
+
+{
+    "code":"123456"
+}
+
+### This is to send message
+POST http://192.168.18.4:3500/api/message/add
+Content-Type: application/json
+auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjNkNTFjODJiMzAzYWNiZWViM2IyNjMiLCJuYW1lIjoiU3llZCBBbGkgTWVoZGkiLCJlbWFpbCI6ImZhMTgtYmNzLTExNkBjdWlsYWhvcmUuZWR1LnBrIiwidmVyaWZpZWQiOnRydWUsInZlcmlmaWVkS2V5IjoiJDJiJDEwJHNUckphWTRJcm1QT05PSzFuZWNxLk8wOS55aWNvajBsMWo4elZWUzU1bElWNmt4bmhNSDQyIiwiY291bnRyeUNvZGUiOiI5MiIsInBob25lTnVtYmVyIjoiMDMzMjQ1NjQ4MTgiLCJpYXQiOjE2NDkyNDU3NzR9.pnMpilvEcKiPxNoLL0em5XpZPfzYtXRTPF1_HI8J_2c
+
+{
+    "to":"623ed03827b4f854a8cf2681",
+    "message":"I hope you can lower the price"
+}

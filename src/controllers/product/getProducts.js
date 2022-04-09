@@ -19,11 +19,6 @@ const getProducts = handleRouteErrors(async (req, res) => {
 		.select("title price city picture.image1 favourites owner location")
 		.populate("location")
 		.skip((pageNumber - 1) * pageSize).limit(pageSize);
-	// const products = await Product.aggregate([
-	// 	// {$group: {_id: "$_id" ,sum: { $sum: { $cond:[ { $lte: [{$subtract: [new Date(),"$updatedAt"]},259200000] },1,0] } }}},
-	// 	{$project:{createdAt:0}},
-	// 	{$lookup: {from:"locations", localField:"location", foreignField:"_id", as:"location"}},
-	// ])
 
 	return res.status(200).send(products);
 });
