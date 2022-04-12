@@ -3,8 +3,7 @@ import handleRouteErrors from '../../handleRouteErrors.js';
 import { Product } from '../../models/product.js';
 
 const addBid = handleRouteErrors(async(req,res)=>{
-    await validate(req.body);
-    const { productId, price } = req.body;
+    const { productId, price } = await validate(req.body);
     const bid = await Bid.findOne({productId ,by:req.user._id}).catch(() => null);
     if(bid) {
         bid.price = price;

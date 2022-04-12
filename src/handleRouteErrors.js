@@ -3,6 +3,7 @@ const handleRouteErrors = (callback) => {
 		try {
 			await callback(req, res, next)
 		} catch (error) {
+			console.error(error)
 			if (error?.name === "ValidationError")
 				res.status(400).send(error.message);
 			else if (error?.response?.body?.errors)
@@ -10,7 +11,6 @@ const handleRouteErrors = (callback) => {
 			else if (error?.name === "CastError")
 				res.status(400).send(error.message);
 			else {
-				console.error(error)
 				res.status(500).send(error?.message || error)
 			}
 		}

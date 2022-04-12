@@ -1,15 +1,6 @@
-import handleRouteErrors from "../../handleRouteErrors.js";
-import Message from "../../models/message.js";
-import * as yup from "yup";
-
-const validate = async (body) => {
-	const schema = yup.object({
-		id: yup
-			.string("id must be a string")
-			.required("You must provide user id")
-	});
-	return schema.validate(body);
-}
+import handleRouteErrors from "../../../handleRouteErrors.js";
+import Message from "../../../models/message.js";
+import validate from "./validate.js";
 
 const getMessage = handleRouteErrors(async (req, res) => {
 	const { id } = await validate(req.body);

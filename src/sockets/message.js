@@ -5,6 +5,8 @@ const messageSockets = (io) => {
 		})
 		socket.on("message", (data) => { 
 			io.to(data.id).emit("notification", data);
+			io.to(data.id).emit("user-message",data);
+			io.to(data.sender).emit("user-message",data);
 		})
 	})
 }
