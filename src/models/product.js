@@ -90,6 +90,8 @@ const validate = product => {
 	return schema.validate(product)
 }
 
+productSchema.index({"title":"text","description":"text"});
+
 const Product = mongoose.model("Product", productSchema);
 
 export { Product, validate }
