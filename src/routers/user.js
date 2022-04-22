@@ -10,6 +10,7 @@ import checkPhone from './../controllers/user/checkPhone.js';
 import getUser from './../controllers/user/getUser.js';
 import verification from './../middlewares/verification.js';
 import verify from "../controllers/user/verify.js";
+import sendCode from "../controllers/user/sendCode.js";
 
 const user = Router();
 
@@ -18,7 +19,8 @@ user.post("/login", login);
 user.post("/signup", signup);
 user.post("/getByEmail", getByEmail);
 user.post("/checkPhone", checkPhone);
-user.post("/verify", auth, verify)
+user.get("/sendCode", auth, sendCode);
+user.post("/verify", auth, verify);
 user.post("/forgotPassword", auth, verification, forgotPassword);
 user.post("/changePassword", changePassword);
 user.post("/uploadImage", auth, verification, userPicture);

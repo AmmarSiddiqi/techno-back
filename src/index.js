@@ -6,15 +6,16 @@ import "./start/connectDb.js";
 import initSocket from "./start/initSocket.js";
 import http from "http";
 import messageSockets from "./sockets/message.js";
+import { production } from "./constants/constants.js";
 
 const app = express();
 importRoutes(app);
 
 const PORT = process.env.PORT || 3500
-const server = process.env.NODE_ENV?.trim() === "development" ? 
-http.createServer(app).listen({host: "192.168.18.4", port: PORT},
-    ()=>console.log(`Development Server IP: "192.168.18.4" PORT: ${PORT}`)) :
-    app.listen(PORT, () => console.log(`Server Started at PORT: ${PORT}`))
+const server = production ? app.listen(PORT, () => console.log(`Server Started at PORT: ${PORT}`)) :
+http.createServer(app).listen({host: process.env.LOCALADDRESS, port: PORT},
+    ()=>console.log(`Development Server IP: ${process.env.LOCALADDRESS} PORT: ${PORT}`))
+    
 
 const io = initSocket(server);
 messageSockets(io)

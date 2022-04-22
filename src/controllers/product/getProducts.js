@@ -5,7 +5,7 @@ const getProducts = handleRouteErrors(async (req, res) => {
 	const { search, pageNumber: pageNo } = req.body;
 	if (!pageNo)
 		return res.status(400).send("Please provide \"pageNumber\"");
-	let pageSize = 5;
+	let pageSize = 10;
 	let pageNumber = parseInt(pageNo);
 	if (pageNumber < 1) return res.status(400).send("Page Number can't be less than \"1\"");
 	if (search) {

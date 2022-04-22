@@ -1,5 +1,5 @@
 //development || production
-export const production = process.env.NODE_ENV === "production";
+export const production = process.env.NODE_ENV.trim() === "production";
 
 //api versions and information
 export const USER_API_V1 = "/api/user";
