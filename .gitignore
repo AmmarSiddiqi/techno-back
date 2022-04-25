@@ -1,5 +1,4 @@
 node_modules/
-.env.development
 t.js
 ccdata.json
 cities.json

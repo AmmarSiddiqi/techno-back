@@ -13,8 +13,8 @@ importRoutes(app);
 
 const PORT = process.env.PORT || 3500
 const server = production ? app.listen(PORT, () => console.log(`Server Started at PORT: ${PORT}`)) :
-http.createServer(app).listen({host: process.env.LOCALADDRESS, port: PORT},
-    ()=>console.log(`Development Server IP: ${process.env.LOCALADDRESS} PORT: ${PORT}`))
+http.createServer(app).listen({port: PORT},
+    ()=>console.log(`Development Server PORT: ${PORT}`))
     
 
 const io = initSocket(server);
