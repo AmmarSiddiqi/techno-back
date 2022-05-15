@@ -11,7 +11,7 @@ import { locationRouter } from "../routers/location.js";
 import { messageRouter } from "../routers/message.js";
 
 const importRoutes = (app) => {
-    app.use(express.json());
+    app.use(express.json({ limit: '600mb' }));
     app.use(fileUpload());
     app.use(cors({ origin: [process.env.origin, process.env.origin2] }))
     production && productionMiddlewares(app);

@@ -1,8 +1,8 @@
 import express from "express";
-import importRoutes from "./start/importRoutes.js";
 import './start/envConfig.js';
 import './start/config.js';
 import "./start/connectDb.js";
+import importRoutes from "./start/importRoutes.js";
 import initSocket from "./start/initSocket.js";
 import http from "http";
 import messageSockets from "./sockets/message.js";

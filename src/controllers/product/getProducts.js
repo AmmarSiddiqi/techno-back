@@ -3,7 +3,6 @@ import handleRouteErrors from './../../handleRouteErrors.js';
 
 const getProducts = handleRouteErrors(async (req, res) => {
 	const { search, pageNumber: pageNo, filters } = req.body;
-	console.log(filters)
 	if (!pageNo)
 		return res.status(400).send("Please provide \"pageNumber\"");
 	let pageSize = 10;

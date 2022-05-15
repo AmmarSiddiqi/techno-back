@@ -59,17 +59,6 @@ const productSchema = new mongoose.Schema({
 })
 
 const validate = product => {
-	const imageSchema = yup.object({
-		name: yup.string(),
-		data: yup.mixed(),
-		size: yup.number().max(2000000),
-		encoding: yup.string(),
-		tempFilePath: yup.string().nullable(),
-		truncated: yup.boolean(),
-		mimetype: yup.string(),
-		md5: yup.string(),
-		mv: yup.mixed()
-	})
 	const schema = yup.object({
 		title: yup.string().min(8).max(80).required("Please provide product title"),
 		description: yup.string().min(15).max(1000).required("Please provide product description"),
@@ -78,11 +67,11 @@ const validate = product => {
 		subCategory: yup.string().required("Please provide sub-category for product"),
 		location: yup.string().required(),
 		picture: yup.object({
-			image1: imageSchema.required("Please provide product picture"),
-			image2: imageSchema,
-			image3: imageSchema,
-			image4: imageSchema,
-			image5: imageSchema,
+			image1: yup.string().required(),
+			image2: yup.string(),
+			image3: yup.string(),
+			image4: yup.string(),
+			image5: yup.string(),
 		}).nullable(false),
 		lat: yup.string().nullable(true),
 		lng: yup.string().nullable(true)
