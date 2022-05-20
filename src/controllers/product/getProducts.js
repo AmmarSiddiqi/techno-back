@@ -14,23 +14,27 @@ const getProducts = handleRouteErrors(async (req, res) => {
 			$and: [
 				{ price: { "$gte": filters['Minimum Price'] || Number.NEGATIVE_INFINITY } },
 				{ price: { "$lte": filters['Maximum Price'] || Number.POSITIVE_INFINITY } }
-			]
+			],category: filters['mainCategory'], 
+			subCategory: filters['subCategory'],
+			location: filters['city']
 		})
 			.select("title price city picture.image1 favourites owner location")
 			.populate("location")
-			.skip((pageNumber - 1) * pageSize).limit(pageSize);
+			.skip((pageNumber - 1) * pageSize).limit(pageSize)
 		return res.status(200).send(products);
 	}
 	const products = await Product.find({
-		isActive: true, $and: [
-			{ price: { "$gte": filters['Minimum Price'] || Number.NEGATIVE_INFINITY } },
-			{ price: { "$lte": filters['Maximum Price'] || Number.POSITIVE_INFINITY } }
-		]
-	})
-		.sort({ [filters['High to Low']]: -1, [filters['Low to High']]: 1 })
-		.select("title price city picture.image1 favourites owner location")
-		.populate("location")
-		.skip((pageNumber - 1) * pageSize).limit(pageSize);
+			isActive: true, $and: [
+				{ price: { "$gte": filters['Minimum Price'] || Number.NEGATIVE_INFINITY } },
+				{ price: { "$lte": filters['Maximum Price'] || Number.POSITIVE_INFINITY } }
+			],category: filters['mainCategory'],
+			subCategory: filters['subCategory'],
+			location: filters['city']
+		})
+			.sort({ [filters['High to Low']]: -1, [filters['Low to High']]: 1 })
+			.select("title price city picture.image1 favourites owner location")
+			.populate("location")
+			.skip((pageNumber - 1) * pageSize).limit(pageSize);
 
 	return res.status(200).send(products);
 });

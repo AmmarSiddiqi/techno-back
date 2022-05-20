@@ -7,7 +7,7 @@ const getBids = handleRouteErrors(async (req, res) => {
         return res.status(400).send("\"PageNumber\" & \"PageSize\" are required");
     if (!productId)
         return res.status(400).send("\"ProductID\" was not provided");
-    let bids = await Bid.find({ productId })
+    let bids = await Bid.find({ productId }).sort({price: -1})
         .populate("by", "name email countryCode phoneNumber")
         .skip((1 - parseInt(pageNumber)) * parseInt(pageSize))
         .limit(pageSize);
