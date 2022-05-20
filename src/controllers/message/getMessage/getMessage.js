@@ -9,7 +9,6 @@ const getMessage = handleRouteErrors(async (req, res) => {
 	]})
 	.populate("idOne","name email image")
     .populate("idTwo", "name email image")
-	.catch(() => null);
 	if (!messages) return res.status(404).send("Apparently you haven't sent any messages");
 	res.status(200).send(messages);
 })

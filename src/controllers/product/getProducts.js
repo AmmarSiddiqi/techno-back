@@ -18,6 +18,7 @@ const getProducts = handleRouteErrors(async (req, res) => {
 			subCategory: filters['subCategory'],
 			location: filters['city']
 		})
+			.sort({ [filters['High to Low']]: -1, [filters['Low to High']]: 1 })
 			.select("title price city picture.image1 favourites owner location")
 			.populate("location")
 			.skip((pageNumber - 1) * pageSize).limit(pageSize)
