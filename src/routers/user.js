@@ -23,7 +23,7 @@ user.post("/checkPhone", checkPhone);
 user.get("/sendCode", auth, sendCode);
 user.post("/verify", auth, verify);
 user.post("/changeName", auth, changeName);
-user.post("/forgotPassword", auth, verification, forgotPassword);
+user.post("/forgotPassword", forgotPassword);
 user.post("/changePassword", changePassword);
 user.post("/uploadImage", auth, verification, userPicture);
 
