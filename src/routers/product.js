@@ -12,6 +12,7 @@ import getFavourites from './../controllers/product/getFavourites.js';
 import getMyAds from './../controllers/product/getMyAds.js';
 import visible from "../controllers/product/status.js";
 import getCategoryWise from "../controllers/product/getCategoryWise.js";
+import getFreshProducts from "../controllers/product/getFreshProducts.js";
 
 const product = Router();
 
@@ -19,6 +20,7 @@ product.get("/myads", auth, getMyAds);
 product.get("/:id", getById);
 product.get("/categoryWise/:category", getCategoryWise);
 product.post("/",getProducts);
+product.post("/freshProducts",getFreshProducts);
 product.post("/add", auth, verification, addProduct);
 product.post("/status", auth, verification, visible);
 product.post("/getFavourites", auth, verification, getFavourites);
