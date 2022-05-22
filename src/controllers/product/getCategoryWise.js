@@ -6,15 +6,19 @@ const validate = (body) => {
     const schema = yup.object({
         category: yup
             .string()
-            .required()
+            .required(),
+        city: yup
+            .string()
+            .nullable()
     })
     return schema.validate(body);
 }
 
 const getCategoryWise = handleRouteErrors(async(req,res) => {
-    const { category } = await validate(req.params);
+    const { category, city } = await validate(req.params);
+    const findQuery = city !== 'undefined' ? {isActive: true, category, location:city}:{isActive: true,category}
     const products = await Product
-        .find({category})
+        .find(findQuery)
         .select("title price city picture.image1 favourites owner location")
 		.populate("location")
         .limit(5);

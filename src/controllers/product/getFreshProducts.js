@@ -11,15 +11,19 @@ const validate = (body) => {
         pageSize: yup
             .number("\"PageSize\" must be a number")
             .min(1,"\"PageSize\" must be more than 1")
-            .required("Please provide \"pageSize\"")
-
+            .required("Please provide \"pageSize\""),
+        city: yup
+            .string()
+            .nullable()
     });
     return schema.validate(body);
 }
 
 const getFreshProducts = handleRouteErrors(async (req, res) => {
-    const { pageNumber, pageSize } = await validate(req.body);
-    const products = await Product.find({ isActive: true })
+    const { pageNumber, pageSize, city } = await validate(req.body);
+    const findQuery = city !== "undefined" ? {isActive: true, location:city}: {isActive: true}
+    const products = await Product.find(findQuery)
+        .sort({_id: -1})
         .select("title price city picture.image1 favourites owner location")
         .populate("location")
         .skip((pageNumber - 1) * pageSize).limit(pageSize);

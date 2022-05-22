@@ -18,7 +18,7 @@ const product = Router();
 
 product.get("/myads", auth, getMyAds);
 product.get("/:id", getById);
-product.get("/categoryWise/:category", getCategoryWise);
+product.get("/categoryWise/:category/:city?", getCategoryWise);
 product.post("/",getProducts);
 product.post("/freshProducts",getFreshProducts);
 product.post("/add", auth, verification, addProduct);

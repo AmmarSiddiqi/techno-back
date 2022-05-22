@@ -56,7 +56,7 @@ const productSchema = new mongoose.Schema({
 	lat: {type: String},
 	lng: {type: String},
 	isActive: {type: Boolean, default:true}
-})
+},{timestamps: true})
 
 const validate = product => {
 	const schema = yup.object({
