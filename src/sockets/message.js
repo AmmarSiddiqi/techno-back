@@ -8,6 +8,9 @@ const messageSockets = (io) => {
 			io.to(data.id).emit("user-message",data);
 			io.to(data.sender).emit("user-message",data);
 		})
+		socket.on("bid-event", data => {
+			io.to(data.to).emit("bid-recieved",data);
+		})
 	})
 }
 
