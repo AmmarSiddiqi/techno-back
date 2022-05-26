@@ -19,7 +19,7 @@ const getProducts = handleRouteErrors(async (req, res) => {
 			location: filters['city']
 		})
 			.sort({ price: filters['priceSort'] })
-			.select("title price city picture.image1 favourites owner location")
+			.select("title price city picture.image1 favourites owner location createdAt updatedAt")
 			.populate("location")
 			.skip((pageNumber - 1) * pageSize).limit(pageSize)
 		return res.status(200).send(products);
@@ -33,7 +33,7 @@ const getProducts = handleRouteErrors(async (req, res) => {
 			location: filters['city']
 		})
 			.sort({ price: filters['priceSort'] })
-			.select("title price city picture.image1 favourites owner location")
+			.select("title price city picture.image1 favourites owner location createdAt updatedAt")
 			.populate("location")
 			.skip((pageNumber - 1) * pageSize).limit(pageSize);
 

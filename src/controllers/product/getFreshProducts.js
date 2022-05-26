@@ -24,7 +24,7 @@ const getFreshProducts = handleRouteErrors(async (req, res) => {
     const findQuery = city !== "undefined" ? {isActive: true, location:city}: {isActive: true}
     const products = await Product.find(findQuery)
         .sort({_id: -1})
-        .select("title price city picture.image1 favourites owner location")
+        .select("title price city picture.image1 favourites owner location createdAt updatedAt")
         .populate("location")
         .skip((pageNumber - 1) * pageSize).limit(pageSize);
     return res.status(200).send(products);

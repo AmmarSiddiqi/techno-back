@@ -19,7 +19,7 @@ const getCategoryWise = handleRouteErrors(async(req,res) => {
     const findQuery = city !== 'undefined' ? {isActive: true, category, location:city}:{isActive: true,category}
     const products = await Product
         .find(findQuery)
-        .select("title price city picture.image1 favourites owner location")
+        .select("title price city picture.image1 favourites owner location createdAt updatedAt")
 		.populate("location")
         .limit(5);
     res.status(200).send(products);
