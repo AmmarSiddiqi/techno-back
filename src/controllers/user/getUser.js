@@ -1,13 +1,32 @@
 import handleRouteErrors from './../../handleRouteErrors.js';
 import { User } from '../../models/user.js';
-import { compare } from 'bcrypt';
+import { Bid } from '../../models/bid.js';
 
 const getUser = handleRouteErrors(async(req,res)=>{
     const user = await User.findById(req.user._id)
         .select("name email countryCode phoneNumber verified favourites image")
         .catch(()=>null)
     if(!user) return res.status(404).send("No user was found against this token");
-    res.status(200).send(user);
+    const placedBids = await Bid.find({by: user._id})
+    .populate("by", "name email countryCode phoneNumber")
+    .populate("productId", "title price owner isActive picture.image1")
+    
+    const recievedBids = await Bid.find({productOwner: user._id})
+    .populate("by", "name email countryCode phoneNumber")
+    .populate("productId", "title price owner isActive picture.image1")
+    
+    const users = {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        countryCode: user.countryCode,
+        phoneNumber: user.phoneNumber,
+        verified: user.verified,
+        favourites: user.favourites,
+        image: user.image,
+        placedBids, recievedBids
+    }
+    res.status(200).send(users);
 });
 
 export default getUser;

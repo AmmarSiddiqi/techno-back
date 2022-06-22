@@ -13,7 +13,7 @@ importRoutes(app);
 
 const PORT = process.env.PORT || 3500
 const server = production ? app.listen(PORT, () => console.log(`Server Started at PORT: ${PORT}`)) :
-http.createServer(app).listen({port: PORT},
+http.createServer(app).listen({host: '192.168.18.4',port: PORT},
     ()=>console.log(`Development Server PORT: ${PORT}`))
     
 
