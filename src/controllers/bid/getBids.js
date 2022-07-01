@@ -14,7 +14,7 @@ const getBids = handleRouteErrors(async (req, res) => {
     if(!bids) return res.status(404).send("Product currently has no bids");
     else if(bids[0]?.productOwner.toString() === req.user._id)
         return res.status(200).send(bids);
-    let bidsWithLimitedData = bids.map(bid => ({at: bid.at, price: bid.price, userId: bid.by._id, productId: bid.productId}))
+    let bidsWithLimitedData = bids.map(bid => ({_id: bid._id,at: bid.at, price: bid.price, userId: bid.by._id, productId: bid.productId}))
     res.status(200).send(bidsWithLimitedData)
 });
 
