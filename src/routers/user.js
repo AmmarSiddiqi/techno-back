@@ -12,6 +12,7 @@ import verification from './../middlewares/verification.js';
 import verify from "../controllers/user/verify.js";
 import sendCode from "../controllers/user/sendCode.js";
 import changeName from "../controllers/user/changeName/changeName.js";
+import updatePhone from "../controllers/user/updatePhone/updatePhone.js";
 
 const user = Router();
 
@@ -20,6 +21,7 @@ user.post("/login", login);
 user.post("/signup", signup);
 user.post("/getByEmail", getByEmail);
 user.post("/checkPhone", checkPhone);
+user.post("/updatePhone",auth, verification, updatePhone);
 user.get("/sendCode", auth, sendCode);
 user.post("/verify", auth, verify);
 user.post("/changeName", auth, changeName);
