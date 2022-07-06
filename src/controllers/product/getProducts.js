@@ -18,7 +18,7 @@ const getProducts = handleRouteErrors(async (req, res) => {
 			subCategory: filters['subCategory'],
 			location: filters['city']
 		})
-			.sort({ price: filters['priceSort'] })
+			.sort({ [filters["priceSort"]?"price":"_id"]: filters['priceSort']||-1 })
 			.select("title price city picture.image1 favourites owner location createdAt updatedAt")
 			.populate("location")
 			.skip((pageNumber - 1) * pageSize).limit(pageSize)
@@ -32,7 +32,7 @@ const getProducts = handleRouteErrors(async (req, res) => {
 			subCategory: filters['subCategory'],
 			location: filters['city']
 		})
-			.sort({ price: filters['priceSort'] })
+			.sort({ [filters["priceSort"]?"price":"_id"]: filters['priceSort']||-1 })
 			.select("title price city picture.image1 favourites owner location createdAt updatedAt")
 			.populate("location")
 			.skip((pageNumber - 1) * pageSize).limit(pageSize);
