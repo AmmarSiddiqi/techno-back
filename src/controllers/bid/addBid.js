@@ -19,11 +19,10 @@ const addBid = handleRouteErrors(async(req,res)=>{
             return res.status(400).send("You can't bid against your own products")
         bid = new Bid({ productId, price, by:req.user._id, productOwner: product.owner.toString() });
         await bid.save();
-        bid = await Bid.findOne({by:req.user._id, productOwner: product.owner.toString()})
+        bid = await Bid.findOne({by:req.user._id, productId})
             .populate("by", "name email countryCode phoneNumber")
             .populate("productId", "title price owner isActive picture.image1")
     }
-    const limitedDataBid = {at: bid.at, price: bid.price, userId: bid.by, productId: bid.productId}
     res.status(200).send(bid);
 });
 
