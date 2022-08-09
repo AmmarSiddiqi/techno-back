@@ -13,3 +13,7 @@ if(!production && (!HOST || !origin2)){
     console.log("HOST && origin2 not set in development server");
     process.exit(-1);
 }
+
+
+
+console.log('Check');
